@@ -6,6 +6,7 @@ from pyrogram.types import Message
 
 from AnonXMusic import app
 from AnonXMusic.misc import SUDOERS
+from config import OWNER_ID
 from AnonXMusic.utils import get_readable_time
 from AnonXMusic.utils.database import (
     add_banned_user,
@@ -20,7 +21,7 @@ from AnonXMusic.utils.extraction import extract_user
 from config import BANNED_USERS
 
 
-@app.on_message(filters.command(["gban", "globalban"]) & SUDOERS)
+@app.on_message(filters.command(["gban", "globalban"]) & filters.user(OWNER_ID))
 @language
 async def global_ban(client, message: Message, _):
     if not message.reply_to_message:
@@ -68,7 +69,7 @@ async def global_ban(client, message: Message, _):
     await mystic.delete()
 
 
-@app.on_message(filters.command(["ungban"]) & SUDOERS)
+@app.on_message(filters.command(["ungban"]) & filters.user(OWNER_ID))
 @language
 async def global_un(client, message: Message, _):
     if not message.reply_to_message:

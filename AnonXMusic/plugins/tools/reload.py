@@ -87,6 +87,7 @@ async def restartbot(client, message: Message, _):
 
 
 @app.on_callback_query(filters.regex("close") & ~BANNED_USERS)
+@ActualAdminCB
 async def close_menu(_, CallbackQuery):
     try:
         await CallbackQuery.answer()
